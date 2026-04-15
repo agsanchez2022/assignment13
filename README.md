@@ -1,264 +1,56 @@
-# 📦 Project Setup
+# Module 13 – JWT Authentication, Frontend Validation & E2E Testing
+This project builds on the previous module by adding JWT-based authentication, frontend pages, and end-to-end testing. The backend is built using FastAPI, SQLAlchemy, and Pydantic, and now includes secure user registration and login using JWT tokens. It also includes frontend validation and automated testing with Playwright, along with Docker and CI/CD using GitHub Actions.
 
----
+## 🧪 How to Run Tests Locally
 
-# 🧩 1. Install Homebrew (Mac Only)
-
-> Skip this step if you're on Windows.
-
-Homebrew is a package manager for macOS.  
-You’ll use it to easily install Git, Python, Docker, etc.
-
-**Install Homebrew:**
-
+1. Activate virtual environment:
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+source venv/bin/activate
 ```
 
-**Verify Homebrew:**
-
-```bash
-brew --version
-```
-
-If you see a version number, you're good to go.
-
----
-
-# 🧩 2. Install and Configure Git
-
-## Install Git
-
-- **MacOS (using Homebrew)**
-
-```bash
-brew install git
-```
-
-- **Windows**
-
-Download and install [Git for Windows](https://git-scm.com/download/win).  
-Accept the default options during installation.
-
-**Verify Git:**
-
-```bash
-git --version
-```
-
----
-
-## Configure Git Globals
-
-Set your name and email so Git tracks your commits properly:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your_email@example.com"
-```
-
-Confirm the settings:
-
-```bash
-git config --list
-```
-
----
-
-## Generate SSH Keys and Connect to GitHub
-
-> Only do this once per machine.
-
-1. Generate a new SSH key:
-
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-(Press Enter at all prompts.)
-
-2. Start the SSH agent:
-
-```bash
-eval "$(ssh-agent -s)"
-```
-
-3. Add the SSH private key to the agent:
-
-```bash
-ssh-add ~/.ssh/id_ed25519
-```
-
-4. Copy your SSH public key:
-
-- **Mac/Linux:**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | pbcopy
-```
-
-- **Windows (Git Bash):**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | clip
-```
-
-5. Add the key to your GitHub account:
-   - Go to [GitHub SSH Settings](https://github.com/settings/keys)
-   - Click **New SSH Key**, paste the key, save.
-
-6. Test the connection:
-
-```bash
-ssh -T git@github.com
-```
-
-You should see a success message.
-
----
-
-# 🧩 3. Clone the Repository
-
-Now you can safely clone the course project:
-
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
-
----
-
-# 🛠️ 4. Install Python 3.10+
-
-## Install Python
-
-- **MacOS (Homebrew)**
-
-```bash
-brew install python
-```
-
-- **Windows**
-
-Download and install [Python for Windows](https://www.python.org/downloads/).  
-✅ Make sure you **check the box** `Add Python to PATH` during setup.
-
-**Verify Python:**
-
-```bash
-python3 --version
-```
-or
-```bash
-python --version
-```
-
----
-
-## Create and Activate a Virtual Environment
-
-(Optional but recommended)
-
-```bash
-python3 -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate.bat  # Windows
-```
-
-### Install Required Packages
-
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-# 🐳 5. (Optional) Docker Setup
-
-> Skip if Docker isn't used in this module.
-
-## Install Docker
-
-- [Install Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
-- [Install Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
-
-## Build Docker Image
-
+3. Start Docker:
 ```bash
-docker build -t <image-name> .
+docker compose up -d
 ```
 
-## Run Docker Container
-
+4. Run tests:
 ```bash
-docker run -it --rm <image-name>
+pytest
 ```
 
 ---
 
-# 🚀 6. Running the Project
+## 🐳 Docker Hub Repository
 
-- **Without Docker**:
-
-```bash
-python main.py
-```
-
-(or update this if the main script is different.)
-
-- **With Docker**:
-
-```bash
-docker run -it --rm <image-name>
-```
+https://hub.docker.com/repository/docker/drew2026000000/module13_is601/general
 
 ---
 
-# 📝 7. Submission Instructions
+## 📸 Screenshots
 
-After finishing your work:
+### GitHub Actions
+![GitHub Actions](github_actions.png)
 
-```bash
-git add .
-git commit -m "Complete Module X"
-git push origin main
-```
 
-Then submit the GitHub repository link as instructed.
+### Application Running in Browser/VSCode:
+![Application](login_register.png)
+![Application](pytest_results.png)
 
 ---
 
-# 🔥 Useful Commands Cheat Sheet
+## 📸 Reflection
 
-| Action                         | Command                                          |
-| ------------------------------- | ------------------------------------------------ |
-| Install Homebrew (Mac)          | `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` |
-| Install Git                     | `brew install git` or Git for Windows installer |
-| Configure Git Global Username  | `git config --global user.name "Your Name"`      |
-| Configure Git Global Email     | `git config --global user.email "you@example.com"` |
-| Clone Repository                | `git clone <repo-url>`                          |
-| Create Virtual Environment     | `python3 -m venv venv`                           |
-| Activate Virtual Environment   | `source venv/bin/activate` / `venv\Scripts\activate.bat` |
-| Install Python Packages        | `pip install -r requirements.txt`               |
-| Build Docker Image              | `docker build -t <image-name> .`                |
-| Run Docker Container            | `docker run -it --rm <image-name>`               |
-| Push Code to GitHub             | `git add . && git commit -m "message" && git push` |
+This module helped me understand how authentication actually works in a real application. Before this, I had some idea of login systems, but implementing JWT made it more clear how tokens are created, stored, and used to protect routes.
 
----
+Working on the frontend pages was also useful because it connected the backend to something more user-facing. Adding validation on the client side made the app feel more complete and realistic instead of just testing endpoints.
 
-# 📋 Notes
+One of the main challenges I ran into was dealing with dependency issues and getting everything to work together, especially with authentication and testing. I had to troubleshoot errors related to libraries and environment setup, which took some time but helped me understand the system better overall.
 
-- Install **Homebrew** first on Mac.
-- Install and configure **Git** and **SSH** before cloning.
-- Use **Python 3.10+** and **virtual environments** for Python projects.
-- **Docker** is optional depending on the project.
+Another important part was running tests with Docker and making sure everything worked in the CI/CD pipeline. Seeing all tests pass and the pipeline succeed made it feel like a complete working application.
 
----
-
-# 📎 Quick Links
-
-- [Homebrew](https://brew.sh/)
-- [Git Downloads](https://git-scm.com/downloads)
-- [Python Downloads](https://www.python.org/downloads/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [GitHub SSH Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+Overall, this assignment helped me connect backend development, authentication, testing, and deployment into one project, which made it feel much closer to a real-world system.
